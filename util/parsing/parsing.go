@@ -27,8 +27,18 @@ func FromString(s string) *Parser {
 	return &Parser{strings.TrimSpace(s)}
 }
 
+func (p *Parser) Split(sep string) []string {
+	return strings.Split(p.data, sep)
+}
+func (p *Parser) Contents() string {
+	return p.data
+}
 func (p *Parser) Lines() LineSlice {
 	return strings.Split(p.data, "\n")
+}
+
+func (slice LineSlice) Get() []string {
+	return slice
 }
 
 func (p *Parser) Words() WordSlice {

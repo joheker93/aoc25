@@ -26,6 +26,19 @@ func Product[T constraints.Integer | constraints.Float](ts []T) T {
 	return prod
 }
 
+func Equal[T comparable](a, b []T) bool {
+	if len(a) != len(b) {
+		return false
+	}
+
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+
+	return true
+}
 func Map[A, B any](as []A, fn func(A) B) []B {
 	bs := make([]B, len(as))
 
