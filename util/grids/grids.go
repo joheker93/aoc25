@@ -5,19 +5,34 @@ import (
 	"aoc25/util/xmath"
 )
 
-// package util
-
-func Neighbours8[T any](grid [][]T, p point.Point) []point.Point {
-	return neighbours(grid, p, true)
+func Neighbours8[T any](grid [][]T, row, col int) []point.Point {
+	return neighbours(grid, row, col, true)
 }
 
-func Neighbours4[T any](grid [][]T, p point.Point) []point.Point {
-	return neighbours(grid, p, false)
+func Neighbours8Values[T any](grid [][]T, row, col int) []T {
+	vals := make([]T, 0)
+	for _, p := range neighbours(grid, row, col, true) {
+		vals = append(vals, grid[p.Y][p.X])
+	}
+
+	return vals
 }
 
-func neighbours[T any](grid [][]T, p point.Point, diagonals bool) []point.Point {
+func Neighbours4[T any](grid [][]T, row, col int) []point.Point {
+	return neighbours(grid, row, col, false)
+}
+
+func Neighbours4Values[T any](grid [][]T, row, col int) []T {
+	vals := make([]T, 0)
+	for _, p := range neighbours(grid, row, col, false) {
+		vals = append(vals, grid[p.Y][p.X])
+	}
+
+	return vals
+}
+
+func neighbours[T any](grid [][]T, row, col int, diagonals bool) []point.Point {
 	neighbours := []point.Point{}
-	row, col := p.Y, p.X
 
 	for r := row - 1; r <= row+1; r++ {
 		for c := col - 1; c <= col+1; c++ {
