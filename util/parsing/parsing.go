@@ -45,6 +45,10 @@ func (p *Parser) Words() WordSlice {
 	return strings.Fields(strings.ReplaceAll(p.data, "\n", " "))
 }
 
+func (slice WordSlice) Get() []string {
+	return slice
+}
+
 func (p *Parser) Grid(sep string) [][]string {
 	lines := p.Lines()
 	grid := make([][]string, len(lines))

@@ -123,6 +123,28 @@ func Flip[A any](grid [][]A) [][]A {
 	return flipped
 }
 
+func Transpose[A any](grid [][]A) [][]A {
+	if len(grid) == 0 {
+		return [][]A{}
+	}
+
+	rows := len(grid)
+	cols := len(grid[0])
+
+	transposed := make([][]A, cols)
+	for i := range transposed {
+		transposed[i] = make([]A, rows)
+	}
+
+	for r := range rows {
+		for c := range cols {
+			transposed[c][r] = grid[r][c]
+		}
+	}
+
+	return transposed
+}
+
 func FindAny[A comparable](grid [][]A, a A) (point.Point, bool) {
 	for r, row := range grid {
 		for c, elem := range row {
